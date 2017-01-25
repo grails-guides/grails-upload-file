@@ -1,4 +1,4 @@
-package grails.upload.file
+package demo
 
 class BootStrap {
 
