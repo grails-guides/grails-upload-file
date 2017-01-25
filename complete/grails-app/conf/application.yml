@@ -1,5 +1,17 @@
 ---
 grails:
+    guides:
+        cdnFolder: /Users/sdelamo/Sites/GrailsGuides/UploadFiles
+        cdnRootUrl: http://localhost:8888
+---
+grails:
+    plugins:
+        awssdk:
+            s3:
+                region: eu-west-1
+                bucket: grails-guides
+---
+grails:
     profile: web
     codegen:
         defaultPackage: demo
@@ -63,6 +75,9 @@ grails:
             maxsize: 1000
     controllers:
         defaultScope: singleton
+        upload:
+          maxFileSize: 26214400
+          maxRequestSize: 26214400
     converters:
         encoding: UTF-8
     views:

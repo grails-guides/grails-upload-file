@@ -1,0 +1,9 @@
+Install https://github.com/agorapulse/grails-aws-sdk/tree/master/grails-aws-sdk-s3[Grails AWS SDK S3 Plugin]
+
+Modify you `build.grade` file
+
+[source, groovy]
+.build.gradle
+----
+include::{sourceDir}/build.gradle[indent=0,lines="23,26,27,35,36,57,58"]
+----

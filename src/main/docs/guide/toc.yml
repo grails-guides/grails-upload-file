@@ -1,4 +1,4 @@
-gettingStarted: 
+gettingStarted:
   title: Getting Started
   requirements: What you will need
   howto: How to complete the guide
@@ -6,3 +6,7 @@ writingTheApp:
   title: Writing the Application
 runningTheApp:
   title: Running the Application
+  domainClass: Domain Class
+  controller: Controller
+  uploadFile: Upload File
+  awsS3: AWS S3 Grails Plugin

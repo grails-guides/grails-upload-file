@@ -1,0 +1,80 @@
+Generate static http://docs.grails.org/latest/guide/scaffolding.html[Scaffolding] for `Hotel`
+
+[source, bash]
+----
+./grailsw generate-all Hotel
+| Rendered template Controller.groovy to destination grails-app/controllers/demo/HotelController.groovy
+| Rendered template Spec.groovy to destination src/test/groovy/demo/HotelControllerSpec.groovy
+| Scaffolding completed for grails-app/domain/demo/Hotel.groovy
+| Rendered template edit.gsp to destination grails-app/views/hotel/edit.gsp
+| Rendered template create.gsp to destination grails-app/views/hotel/create.gsp
+| Rendered template index.gsp to destination grails-app/views/hotel/index.gsp
+| Rendered template show.gsp to destination grails-app/views/hotel/show.gsp
+| Views generated for grails-app/domain/demo/Hotel.groovy
+----
+
+Generate static http://docs.grails.org/latest/guide/scaffolding.html[Scaffolding] for `PointOfInterest`
+
+[source, bash]
+----
+./grailsw generate-all PointOfInterest
+| Rendered template Controller.groovy to destination grails-app/controllers/demo/PointOfInterestController.groovy
+| Rendered template Spec.groovy to destination src/test/groovy/demo/PointOfInterestControllerSpec.groovy
+| Scaffolding completed for grails-app/domain/demo/PointOfInterest.groovy
+| Rendered template edit.gsp to destination grails-app/views/pointOfInterest/edit.gsp
+| Rendered template create.gsp to destination grails-app/views/pointOfInterest/create.gsp
+| Rendered template index.gsp to destination grails-app/views/pointOfInterest/index.gsp
+| Rendered template show.gsp to destination grails-app/views/pointOfInterest/show.gsp
+| Views generated for grails-app/domain/demo/PointOfInterest.groovy
+----
+
+Generate static http://docs.grails.org/latest/guide/scaffolding.html[Scaffolding] for `Restaurant`
+
+Generate static http://docs.grails.org/latest/guide/scaffolding.html[Scaffolding] for `PointOfInterest`
+
+[source, bash]
+----
+./grailsw generate-all Restaurant
+----
+
+
+We are not going to set the property `featuredImageUrl` with the `edit` and `create` forms.
+
+We are going to create a http://docs.grails.org/2.3.0/guide/single.html#commandObjects[Command Object] with just a `name` property.
+
+[source, groovy]
+./grails-app/controllers/demo/HotelCommand.groovy
+----
+include::{sourceDir}/grails-app/controllers/demo/HotelCommand.groovy[indent=0]
+----
+
+Modify the `save` action to use the Command Object.
+
+[source, groovy]
+./grails-app/controllers/demo/HotelController.groovy
+----
+include::{sourceDir}/grails-app/controllers/demo/HotelController.groovy[indent=0,tag=saveAction]
+----
+
+Modify the `update` action to use the Command Object.
+
+[source, groovy]
+./grails-app/controllers/demo/HotelController.groovy
+----
+include::{sourceDir}/grails-app/controllers/demo/HotelController.groovy[indent=0,tag=updateAction]
+----
+
+Exclude the `featuredImageUrl` property from the edit and create forms:
+
+[source, groovy]
+./grails-app/views/hotel/create.gsp
+----
+include::{sourceDir}/grails-app/views/hotel/create.gsp[indent=0,lines=30]
+----
+
+
+[source, groovy]
+./grails-app/views/hotel/edit.gsp
+----
+include::{sourceDir}/grails-app/views/hotel/edit.gsp[indent=0,lines=32]
+----
