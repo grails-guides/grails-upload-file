@@ -1,0 +1,11 @@
+Grails 3's default file size is 128000 (~128KB).
+
+We are going to allow 25MB files uploads.
+
+25 * 1024 * 1204 = 26.214.400 bytes
+
+[source, groovy]
+./grails-app/conf/application.yml
+----
+include::{sourceDir}/grails-app/conf/application.yml[indent=0,lines="40,76,78..80"]
+----

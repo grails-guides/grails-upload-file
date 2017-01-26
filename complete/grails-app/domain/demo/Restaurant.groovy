@@ -2,8 +2,8 @@ package demo
 
 class Restaurant {
     String name
-    byte[] featuredImageBytes
-    String featuredImageContentType
+    byte[] featuredImageBytes // <1>
+    String featuredImageContentType // <2>
 
     static constraints = {
         featuredImageBytes nullable: true
@@ -11,7 +11,6 @@ class Restaurant {
     }
 
     static mapping = {
-        featuredImageBytes column: "featured_image_bytes", sqlType: "longblob"
-
+        featuredImageBytes column: "featured_image_bytes", sqlType: "longblob" // <3>
     }
 }

@@ -24,6 +24,7 @@ class RestaurantController {
         }
         render file: restaurant.featuredImageBytes, contentType: restaurant.featuredImageContentType
     }
+
     // end::featuredImage[]
 
     // tag::editFeaturedImage[]
@@ -31,6 +32,7 @@ class RestaurantController {
     def editFeaturedImage(Restaurant restaurant) {
         respond restaurant
     }
+
     // end::editFeaturedImage[]
 
     // tag::index[]
@@ -40,6 +42,7 @@ class RestaurantController {
         def (l, total) = restaurantGormService.list(params)
         respond l, model:[restaurantCount: total]
     }
+
     // end::index[]
 
     // tag::show[]
@@ -47,6 +50,7 @@ class RestaurantController {
     def show(Restaurant restaurant) {
         respond restaurant
     }
+
     // end::show[]
 
     // tag::create[]
@@ -54,6 +58,7 @@ class RestaurantController {
     def create() {
         respond new Restaurant(params)
     }
+
     // end::create[]
 
     // tag::edit[]
@@ -61,6 +66,7 @@ class RestaurantController {
     def edit(Restaurant restaurant) {
         respond restaurant
     }
+
     // end::edit[]
 
     // tag::uploadFeaturedImage[]
@@ -94,8 +100,8 @@ class RestaurantController {
             }
             '*'{ respond restaurant, [status: OK] }
         }
-
     }
+
     // end::uploadFeaturedImage[]
 
     // tag::save[]
@@ -130,6 +136,7 @@ class RestaurantController {
             '*' { respond restaurant, [status: CREATED] }
         }
     }
+
     // end::save[]
 
     // tag::update[]
@@ -164,6 +171,7 @@ class RestaurantController {
             '*'{ respond restaurant, [status: OK] }
         }
     }
+
     // end::update[]
 
     // tag::delete[]
@@ -186,8 +194,10 @@ class RestaurantController {
             '*'{ render status: NO_CONTENT }
         }
     }
+
     // end::delete[]
 
+    // tag::notFound[]
     protected void notFound() {
         request.withFormat {
             form multipartForm {
@@ -197,4 +207,6 @@ class RestaurantController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    // end::notFound[]
 }

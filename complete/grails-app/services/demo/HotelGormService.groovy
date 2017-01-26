@@ -9,16 +9,18 @@ class HotelGormService {
         [Hotel.list(params), Hotel.count()]
     }
 
+    // tag::updateFeaturedImageUrl[]
     @Transactional
     Hotel updateFeaturedImageUrl(Long id, Integer version, String featuredImageUrl) {
         Hotel hotel = Hotel.get(id)
         if ( !hotel ) {
-            return hotel
+            return null
         }
         hotel.version = version
         hotel.featuredImageUrl = featuredImageUrl
         hotel.save()
     }
+    // end::updateFeaturedImageUrl[]
 
     @Transactional
     Hotel save(NameCommand cmd) {

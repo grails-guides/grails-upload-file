@@ -9,6 +9,7 @@ class PointOfInterestGormService {
         [PointOfInterest.list(params), PointOfInterest.count()]
     }
 
+    // tag::updateFeaturedImageUrl[]
     @Transactional
     PointOfInterest updateFeaturedImageUrl(Long pointOfInterestId, Integer version, String featuredImageUrl) {
         PointOfInterest poi = PointOfInterest.get(pointOfInterestId)
@@ -19,6 +20,7 @@ class PointOfInterestGormService {
         poi.featuredImageUrl = featuredImageUrl
         poi.save()
     }
+    // end::updateFeaturedImageUrl[]
 
     @Transactional
     PointOfInterest save(NameCommand cmd) {

@@ -4,9 +4,27 @@ gettingStarted:
   howto: How to complete the guide
 writingTheApp:
   title: Writing the Application
+  featuredImageCommand: Featured Image Command Object
+  increaseFileSize: Increase allowed file size
+restaurant:
+  title: Restaurant - Upload and save as byte[]
+  restaurantDomainClass: Restaurant Domain Class
+  restaurantScaffolding: Restaurant Static Scaffolding
+  restaurantView: Restaurant Views
+  restaurantUploadFeaturedImageService: Upload Featured Image Service
+  loadByteArrayImage: Load byte array Image
+pointOfInterest:
+  title: Point of Interest - Upload and transfer
+  pointOfInterestDomainClass: Point of Interest Domain Class
+  pointOfInterestScaffolding: Point of Interest Static Scaffolding
+  pointOfInterestView: Point of Interest  Views
+  pointOfInterestUploadFeaturedImageService: Upload Featured Image Service
+awsS3:
+  title: Hotel - Upload to AWS S3
+  hotelDomainClass: Hotel Domain Class
+  hotelScaffolding: Hotel Static Scaffolding
+  hotelView: Hotel Views
+  hotelUploadFeaturedImageService: Upload image to S3
+  awsAccessAndSecret: Run the App with AWS Access and Secret
 runningTheApp:
   title: Running the Application
-  domainClass: Domain Class
-  controller: Controller
-  uploadFile: Upload File
-  awsS3: AWS S3 Grails Plugin

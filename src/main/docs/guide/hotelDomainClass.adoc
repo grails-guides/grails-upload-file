@@ -1,0 +1,14 @@
+[source, bash]
+----
+./grailsw create-domain-class Hotel
+| Created grails-app/domain/demo/Hotel.groovy
+| Created src/test/groovy/demo/HotelSpec.groovy
+----
+
+[source, groovy]
+./grails-app/domain/demo/Hotel.groovy
+----
+include::{sourceDir}/grails-app/domain/demo/Hotel.groovy[indent=0]
+----
+
+<1> We store the AWS S3 url of the featured image

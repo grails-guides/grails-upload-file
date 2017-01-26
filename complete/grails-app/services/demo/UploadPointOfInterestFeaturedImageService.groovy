@@ -18,17 +18,21 @@ class UploadPointOfInterestFeaturedImageService implements GrailsConfigurationAw
 
     PointOfInterest uploadFeatureImage(FeaturedImageCommand cmd) {
 
-        def folder = new File(cdnFolder)
         String filename = cmd.featuredImageFile.originalFilename
-        def destinationPath = "${folder}/${filename}" as String
-        cmd.featuredImageFile.transferTo(new File(destinationPath))
+        def folderPath = "${cdnFolder}/pointOfInterest/${cmd.id}" as String
+        def folder = new File(folderPath)
+        if ( !folder.exists() ) {
+            folder.mkdirs()
+        }
+        def path = "${folderPath}/${filename}" as String
+        cmd.featuredImageFile.transferTo(new File(path))
 
-        String featuredImageUrl = "${cdnRootUrl}/${filename}"
+        String featuredImageUrl = "${cdnRootUrl}//pointOfInterest/${cmd.id}/${filename}"
 
         def poi = pointOfInterestGormService.updateFeaturedImageUrl(cmd.id, cmd.version, featuredImageUrl)
 
         if ( !poi || poi.hasErrors() ) {
-            def f = new File(destinationPath)
+            def f = new File(path)
             f.delete()
         }
         poi

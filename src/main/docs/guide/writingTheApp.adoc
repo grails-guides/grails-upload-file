@@ -1,1 +1,3 @@
-TODO: Complete the guide
+We are going to create an app to list tourism resources; hotels, restaurants, and points of interest.
+
+In the next sections, you are going to see in more detail those domain classes.

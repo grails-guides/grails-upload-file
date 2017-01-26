@@ -1,0 +1,12 @@
+[source, bash]
+----
+./grailsw create-domain-class PointOfInterest
+| Created grails-app/domain/demo/PointOfInterest.groovy
+| Created src/test/groovy/demo/PointOfInterestSpec.groovy
+----
+
+[source, groovy]
+./grails-app/domain/demo/PointOfInterest.groovy
+----
+include::{sourceDir}/grails-app/domain/demo/PointOfInterest.groovy[indent=0]
+----

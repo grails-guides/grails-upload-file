@@ -54,7 +54,7 @@ class HotelController {
     def uploadFeaturedImage(FeaturedImageCommand cmd) {
 
         if (cmd.hasErrors()) {
-            respond(cmd, model: [hotel: cmd], view: 'editFeaturedImage')
+            respond(cmd.errors, model: [hotel: cmd], view: 'editFeaturedImage')
             return
         }
 
@@ -65,7 +65,7 @@ class HotelController {
         }
 
         if (hotel.hasErrors()) {
-            respond(hotel, model: [hotel: hotel], view: 'editFeaturedImage')
+            respond(hotel.errors, model: [hotel: hotel], view: 'editFeaturedImage')
             return
         }
 

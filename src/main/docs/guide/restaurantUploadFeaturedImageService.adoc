@@ -1,0 +1,24 @@
+The `uploadFeatureImage` controller's action uses the previously described command
+object to validate the upload form submission. If it does not find validation errors, it invokes a service.
+
+[source, groovy]
+./grails-app/controllers/demo/RestaurantController.groovy
+----
+include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=1..16]
+include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[tag=uploadFeaturedImage]
+include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=212]
+----
+
+Service extracts the content type and byte[] and saves them in the database.
+
+[source,groovy]
+./grails-app/services/demo/UploadRestaurantFeaturedImageService.groovy
+----
+include::{sourceDir}/grails-app/services/demo/UploadRestaurantFeaturedImageService.groovy[]
+----
+
+[source,groovy]
+./grails-app/services/demo/RestaurantGormService.groovy
+----
+include::{sourceDir}/grails-app/services/demo/RestaurantGormService.groovy[tag=updateRestaurantFeaturedImage]
+----

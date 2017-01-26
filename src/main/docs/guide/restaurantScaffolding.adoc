@@ -1,0 +1,13 @@
+We have used static scaffolding to generate the CRUD ( Create, Read, Update, Delete) functionality.
+
+[source, bash]
+----
+./grailsw generate-all Restaurant
+----
+
+Moreover, we have done a code refactoring of the generated controller `RestaurantController` and we have extracted
+the transactional GORM behavior to a service `RestaurantGormService`.
+
+In order to keep this guide code listings short, we don't include those code snippets. However,
+you can link:https://github.com/{githubSlug}/archive/master.zip[download] and unzip the source or clone this guide repository https://git-scm.com/[Git]: `git clone https://github.com/{githubSlug}.git`
+You can find the finished guide with all the project code at `{githubSlug}/complete`

@@ -19,7 +19,6 @@
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
             <f:table collection="${hotelList}" properties="['name']"/>
-
             <div class="pagination">
                 <g:paginate total="${hotelCount ?: 0}" />
             </div>
