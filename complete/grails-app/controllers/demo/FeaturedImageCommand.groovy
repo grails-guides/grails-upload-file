@@ -19,8 +19,8 @@ class FeaturedImageCommand implements Validateable {
                 return false
             }
 
-            ['jpeg', 'jpg', 'png'].any { // <1>
-                extension -> val.originalFilename?.toLowerCase().endsWith(extension)
+            ['jpeg', 'jpg', 'png'].any { extension -> // <1>
+                 val.originalFilename?.toLowerCase()?.endsWith(extension)
             }
         }
     }
