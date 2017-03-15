@@ -22,7 +22,7 @@ Service uses the `transferTo` method to transfer the file to a local file path.
 In case of error, the service deletes the file it has previously transfered
 
 [source, groovy]
-./grails-app/services/demo/UploadHotelFeaturedImageService.groovy
+./grails-app/services/demo/UploadPointOfInterestFeaturedImageService.groovy
 ----
 include::{sourceDir}/grails-app/services/demo/UploadPointOfInterestFeaturedImageService.groovy[]
 ----
