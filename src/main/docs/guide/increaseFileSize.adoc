@@ -7,5 +7,5 @@ We are going to allow 25MB files uploads.
 [source, groovy]
 ./grails-app/conf/application.yml
 ----
-include::{sourceDir}/grails-app/conf/application.yml[indent=0,lines="40,76,78..80"]
+include::{sourceDir}/grails-app/conf/application.yml[indent=0,lines="48,84,86..88"]
 ----
