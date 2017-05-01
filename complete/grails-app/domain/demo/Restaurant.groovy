@@ -11,6 +11,6 @@ class Restaurant {
     }
 
     static mapping = {
-        featuredImageBytes column: "featured_image_bytes", sqlType: "longblob" // <3>
+        featuredImageBytes column: 'featured_image_bytes', sqlType: 'longblob' // <3>
     }
 }

@@ -1,14 +1,20 @@
 package demo
 
-import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.NO_CONTENT
+import static org.springframework.http.HttpStatus.CREATED
 import grails.transaction.Transactional
 
+@SuppressWarnings('LineLength')
 class HotelController {
 
-    static allowedMethods = [save: "POST",
-                             update: "PUT",
-                             uploadFeaturedImage: "POST",
-                             delete: "DELETE"]
+    static allowedMethods = [
+            save: 'POST',
+            update: 'PUT',
+            uploadFeaturedImage: 'POST',
+            delete: 'DELETE',
+    ]
 
     def uploadHotelFeaturedImageService
 
@@ -30,6 +36,7 @@ class HotelController {
     // end::show[]
 
     // tag::create[]
+    @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
     @Transactional(readOnly = true)
     def create() {
         respond new Hotel(params)
@@ -74,7 +81,7 @@ class HotelController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'hotel.label', default: 'Hotel'), hotel.id])
                 redirect hotel
             }
-            '*'{ respond hotel, [status: OK] }
+            '*' { respond hotel, [status: OK] }
         }
     }
     // end::uploadFeaturedImage[]
@@ -113,7 +120,6 @@ class HotelController {
     }
     // end::saveAction[]
 
-
     // tag::updateAction[]
     @Transactional
     def update(NameUpdateCommand cmd) {
@@ -144,7 +150,7 @@ class HotelController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'hotel.label', default: 'Hotel'), hotel.id])
                 redirect hotel
             }
-            '*'{ respond hotel, [status: OK] }
+            '*' { respond hotel, [status: OK] }
         }
     }
     // end::updateAction[]
@@ -164,9 +170,9 @@ class HotelController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'hotel.label', default: 'Hotel'), hotelId])
-                redirect action:"index", method:"GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
     // tag::delete[]
@@ -175,9 +181,9 @@ class HotelController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'hotel.label', default: 'Hotel'), params.id])
-                redirect action: "index", method: "GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

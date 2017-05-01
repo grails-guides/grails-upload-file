@@ -1,14 +1,20 @@
 package demo
 
-import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.NO_CONTENT
+import static org.springframework.http.HttpStatus.CREATED
 import grails.transaction.Transactional
 
+@SuppressWarnings('LineLength')
 class PointOfInterestController {
 
-    static allowedMethods = [save: "POST",
-                             update: "PUT",
-                             uploadFeaturedImage: 'POST',
-                             delete: "DELETE"]
+    static allowedMethods = [
+            save: 'POST',
+            update: 'PUT',
+            uploadFeaturedImage: 'POST',
+            delete: 'DELETE',
+    ]
 
     def uploadPointOfInterestFeaturedImageService
 
@@ -37,6 +43,7 @@ class PointOfInterestController {
     // end::show[]
 
     // tag::create[]
+    @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
     @Transactional(readOnly = true)
     def create() {
         respond new PointOfInterest(params)
@@ -74,7 +81,7 @@ class PointOfInterestController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'pointOfInterest.label', default: 'Point of Interest'), pointOfInterest.id])
                 redirect pointOfInterest
             }
-            '*'{ respond pointOfInterest, [status: OK] }
+            '*' { respond pointOfInterest, [status: OK] }
         }
     }
     // end::uploadFeaturedImage[]
@@ -140,7 +147,7 @@ class PointOfInterestController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'pointOfInterest.label', default: 'PointOfInterest'), pointOfInterest.id])
                 redirect pointOfInterest
             }
-            '*'{ respond pointOfInterest, [status: OK] }
+            '*' { respond pointOfInterest, [status: OK] }
         }
     }
     // end::update[]
@@ -158,9 +165,9 @@ class PointOfInterestController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'pointOfInterest.label', default: 'PointOfInterest'), pointOfInterestId])
-                redirect action:"index", method:"GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
     // end::delete[]
@@ -169,9 +176,9 @@ class PointOfInterestController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'pointOfInterest.label', default: 'PointOfInterest'), params.id])
-                redirect action: "index", method: "GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

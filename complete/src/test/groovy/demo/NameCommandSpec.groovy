@@ -3,6 +3,7 @@ package demo
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@SuppressWarnings('MethodName')
 class NameCommandSpec extends Specification {
 
     @Unroll

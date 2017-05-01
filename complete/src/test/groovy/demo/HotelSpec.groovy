@@ -7,6 +7,7 @@ import spock.lang.Unroll
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
+@SuppressWarnings('MethodName')
 @TestFor(Hotel)
 class HotelSpec extends Specification {
 

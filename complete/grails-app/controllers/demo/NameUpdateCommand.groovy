@@ -1,7 +1,9 @@
 package demo
 
+import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
 
+@GrailsCompileStatic
 class NameUpdateCommand implements Validateable {
     Long id
     Integer version

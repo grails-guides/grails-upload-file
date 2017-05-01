@@ -1,14 +1,20 @@
 package demo
 
-import static org.springframework.http.HttpStatus.*
+import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.NO_CONTENT
+import static org.springframework.http.HttpStatus.CREATED
 import grails.transaction.Transactional
 
+@SuppressWarnings('LineLength')
 class RestaurantController {
 
-    static allowedMethods = [save: "POST",
-                             update: "PUT",
-                             uploadFeaturedImage: 'POST',
-                             delete: "DELETE"]
+    static allowedMethods = [
+            save: 'POST',
+            update: 'PUT',
+            uploadFeaturedImage: 'POST',
+            delete: 'DELETE',
+    ]
 
     def uploadRestaurantFeaturedImageService
 
@@ -54,6 +60,7 @@ class RestaurantController {
     // end::show[]
 
     // tag::create[]
+    @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
     @Transactional(readOnly = true)
     def create() {
         respond new Restaurant(params)
@@ -98,7 +105,7 @@ class RestaurantController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'restaurant.label', default: 'Restaurant'), restaurant.id])
                 redirect restaurant
             }
-            '*'{ respond restaurant, [status: OK] }
+            '*' { respond restaurant, [status: OK] }
         }
     }
 
@@ -168,7 +175,7 @@ class RestaurantController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'restaurant.label', default: 'Restaurant'), restaurant.id])
                 redirect restaurant
             }
-            '*'{ respond restaurant, [status: OK] }
+            '*' { respond restaurant, [status: OK] }
         }
     }
 
@@ -189,9 +196,9 @@ class RestaurantController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'restaurant.label', default: 'Restaurant'), restaurantId])
-                redirect action:"index", method:"GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -202,9 +209,9 @@ class RestaurantController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'restaurant.label', default: 'Restaurant'), params.id])
-                redirect action: "index", method: "GET"
+                redirect action: 'index', method: 'GET'
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 

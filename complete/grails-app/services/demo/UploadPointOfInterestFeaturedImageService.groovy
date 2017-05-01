@@ -2,13 +2,16 @@ package demo
 
 import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
+import groovy.transform.CompileStatic
 
+@SuppressWarnings('GrailsStatelessService')
+@CompileStatic
 class UploadPointOfInterestFeaturedImageService implements GrailsConfigurationAware {
+
+    PointOfInterestGormService pointOfInterestGormService
 
     String cdnFolder
     String cdnRootUrl
-
-    def pointOfInterestGormService
 
     @Override
     void setConfiguration(Config co) {
@@ -16,6 +19,7 @@ class UploadPointOfInterestFeaturedImageService implements GrailsConfigurationAw
         cdnRootUrl = co.getRequiredProperty('grails.guides.cdnRootUrl')
     }
 
+    @SuppressWarnings('JavaIoPackageAccess')
     PointOfInterest uploadFeatureImage(FeaturedImageCommand cmd) {
 
         String filename = cmd.featuredImageFile.originalFilename
