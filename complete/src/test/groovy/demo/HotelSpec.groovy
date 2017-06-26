@@ -1,6 +1,6 @@
 package demo
 
-import grails.test.mixin.TestFor
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -8,8 +8,7 @@ import spock.lang.Unroll
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @SuppressWarnings('MethodName')
-@TestFor(Hotel)
-class HotelSpec extends Specification {
+class HotelSpec extends Specification implements DomainUnitTest<Hotel> {
 
     @Unroll
     void "name is required. #name is #description"() {
