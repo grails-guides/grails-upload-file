@@ -1,15 +1,19 @@
 ---
+# tag::ymlFive[]
 grails:
     guides:
         cdnFolder: /Users/sdelamo/Sites/GrailsGuides/UploadFiles
         cdnRootUrl: http://localhost:8888
+# end::ymlFive[]
 ---
+# tag::ymlFour[]
 grails:
     plugins:
         awssdk:
             s3:
                 region: eu-west-1
                 bucket: grails-guides
+# end::ymlFour[]
 ---
 grails:
     profile: web
@@ -19,13 +23,10 @@ grails:
         transactionManagement:
             proxies: false
     gorm:
-        # Whether to autowire entities. 
-        # Disabled by default for performance reasons.
-        autowire: false
         reactor:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
-            events: false             
+            events: false
 info:
     app:
         name: '@info.app.name@'
@@ -45,7 +46,9 @@ endpoints:
         enabled: true
 
 ---
+# tag::ymlOne[]
 grails:
+# end::ymlOne[]
     mime:
         disable:
             accept:
@@ -81,11 +84,15 @@ grails:
     urlmapping:
         cache:
             maxsize: 1000
+    # tag::ymlTwo[]
     controllers:
+    # end::ymlTwo[]
         defaultScope: singleton
+        # tag::ymlThree[]
         upload:
           maxFileSize: 26214400
           maxRequestSize: 26214400
+        # end::ymlThree[]
     converters:
         encoding: UTF-8
     views:

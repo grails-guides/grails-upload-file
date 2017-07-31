@@ -15,7 +15,7 @@ folder path where we are going to save the images to.
 [source, groovy]
 ./grails-app/conf/application.yml
 ----
-include::{sourceDir}/grails-app/conf/application.yml[lines=1..6]
+include::{sourceDir}/grails-app/conf/application.yml[tag=ymlFive]
 ----
 
 Service uses the `transferTo` method to transfer the file to a local file path.
