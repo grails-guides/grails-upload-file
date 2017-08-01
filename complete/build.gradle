@@ -60,7 +60,9 @@ dependencies {
     testCompile "org.grails:grails-web-testing-support"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+//tag::awssdk[]
     compile 'org.grails.plugins:aws-sdk-s3:2.1.5'
+//end::awssdk[]    
 }
 
 bootRun {
@@ -73,9 +75,11 @@ assets {
     minifyCss = true
 }
 
+//tag::bootRunSystemProperties[]
 bootRun {
     systemProperties System.properties
 }
+//end::bootRunSystemProperties[]
 
 codenarc {
     toolVersion = '0.27.0'

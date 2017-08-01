@@ -9,7 +9,7 @@ Modify you `build.grade` file
 [source, groovy]
 .build.gradle
 ----
-include::{sourceDir}/build.gradle[indent=0,lines="23,26,27,35,36,57,58"]
+include::{sourceDir}/build.gradle[tag=awssdk]
 ----
 
 We are going to upload our files to an already existing bucket.
@@ -17,6 +17,6 @@ We are going to upload our files to an already existing bucket.
 [source, groovy]
 ./grails-app/conf/application.yml
 ----
-include::{sourceDir}/grails-app/conf/application.yml[indent=0,tag=ymlFour]
+include::{sourceDir}/grails-app/conf/application.yml[tag=awsbucket]
 ----
 
