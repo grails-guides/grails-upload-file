@@ -4,7 +4,7 @@ object to validate the upload form submission. If it does not find validation er
 [source, groovy]
 ./grails-app/controllers/demo/RestaurantController.groovy
 ----
-include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=1..16]
+include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=1..17]
 include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[tag=uploadFeaturedImage]
 include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=212]
 ----
