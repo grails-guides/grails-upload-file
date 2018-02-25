@@ -21,7 +21,7 @@
             </g:if>
             <h1><f:display bean="restaurant" property="name" /></h1>
             <g:if test="${this.restaurant.featuredImageBytes}">
-                <img src="<g:createLink controller="restaurant" action="featuredImage" id="${this.restaurant.id}"/>" width="400"/>
+                <img src="${createLink (controller:"restaurant", action:"featuredImage", id:this.restaurant.id)" width="400"/>
             </g:if>
             <g:form resource="${this.restaurant}" method="DELETE">
                 <fieldset class="buttons">
