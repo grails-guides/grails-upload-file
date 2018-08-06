@@ -1,10 +1,12 @@
 package demo
 
+import grails.gorm.transactions.ReadOnly
+
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.CREATED
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @SuppressWarnings('LineLength')
 class HotelController {
@@ -29,7 +31,7 @@ class HotelController {
     // end::index[]
 
     // tag::show[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def show(Hotel hotel) {
         respond hotel
     }
@@ -37,21 +39,21 @@ class HotelController {
 
     // tag::create[]
     @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
-    @Transactional(readOnly = true)
+    @ReadOnly
     def create() {
         respond new Hotel(params)
     }
     // end::create[]
 
     // tag::editFeaturedImage[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def editFeaturedImage(Hotel hotel) {
         respond hotel
     }
     // end::editFeaturedImage[]
 
     // tag::edit[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def edit(Hotel hotel) {
         respond hotel
     }

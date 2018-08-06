@@ -1,10 +1,12 @@
 package demo
 
+import grails.gorm.transactions.ReadOnly
+
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.CREATED
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 @SuppressWarnings('LineLength')
 class PointOfInterestController {
@@ -29,14 +31,14 @@ class PointOfInterestController {
     // end::index[]
 
     // tag::editFeaturedImage[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def editFeaturedImage(PointOfInterest pointOfInterest) {
         respond pointOfInterest
     }
     // end::editFeaturedImage[]
 
     // tag::show[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def show(PointOfInterest pointOfInterest) {
         respond pointOfInterest
     }
@@ -44,14 +46,14 @@ class PointOfInterestController {
 
     // tag::create[]
     @SuppressWarnings(['GrailsMassAssignment', 'FactoryMethodName'])
-    @Transactional(readOnly = true)
+    @ReadOnly
     def create() {
         respond new PointOfInterest(params)
     }
     // end::create[]
 
     // tag::edit[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def edit(PointOfInterest pointOfInterest) {
         respond pointOfInterest
     }

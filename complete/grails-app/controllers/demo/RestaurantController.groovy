@@ -1,5 +1,7 @@
 package demo
 
+import grails.gorm.transactions.ReadOnly
+import groovy.transform.CompileDynamic
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -42,7 +44,7 @@ class RestaurantController {
     // end::editFeaturedImage[]
 
     // tag::index[]
-    @Transactional(readOnly = true)
+    @ReadOnly
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def (l, total) = restaurantGormService.list(params)

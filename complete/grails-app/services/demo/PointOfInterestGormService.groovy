@@ -1,10 +1,11 @@
 package demo
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.ReadOnly
+import grails.gorm.transactions.Transactional
 
 class PointOfInterestGormService {
 
-    @Transactional(readOnly = true)
+    @ReadOnly
     List list(Map params) {
         [PointOfInterest.list(params), PointOfInterest.count()]
     }
