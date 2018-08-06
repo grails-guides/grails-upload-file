@@ -1,12 +1,9 @@
-[source, bash]
-----
-./grailsw create-domain-class PointOfInterest
-| Created grails-app/domain/demo/PointOfInterest.groovy
-| Created src/test/groovy/demo/PointOfInterestSpec.groovy
-----
+Modify `PointOfInterest` domain class. Add a property `featuredImageUrl`
 
 [source, groovy]
-./grails-app/domain/demo/PointOfInterest.groovy
+./grails-app/domain/example/grails/PointOfInterest.groovy
 ----
-include::{sourceDir}/grails-app/domain/demo/PointOfInterest.groovy[indent=0]
+include::{sourceDir}/grails-app/domain/example/grails/PointOfInterest.groovy[indent=0]
 ----
+
+<1> Use this property to save the url where the image can be retrieved.

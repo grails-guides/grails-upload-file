@@ -1,16 +1,10 @@
-Create a domain class for `Restaurant`
-
-[source, bash]
-----
-./grailsw create-domain-class Restaurant
-| Created grails-app/domain/demo/Restaurant.groovy
-| Created src/test/groovy/demo/RestaurantSpec.groovy
-----
+Modify `Restaurant` domain class. Add two properties `featuredImageBytes` and
+`featuredImageContentType`.
 
 [source, groovy]
-./grails-app/domain/demo/Restaurant.groovy
+./grails-app/domain/example/grails/Restaurant.groovy
 ----
-include::{sourceDir}/grails-app/domain/demo/Restaurant.groovy[indent=0]
+include::{sourceDir}/grails-app/domain/example/grails/Restaurant.groovy[indent=0]
 ----
 
 <1> Use a domain class property to store the bytes of the image in the database

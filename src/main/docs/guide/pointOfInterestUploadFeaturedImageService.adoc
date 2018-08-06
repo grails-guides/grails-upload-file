@@ -2,11 +2,9 @@ The `uploadFeatureImage` controller's action uses the previously described comma
 object to validate the upload form submission. If it does not find validation errors, it invokes a service.
 
 [source, groovy]
-./grails-app/controllers/demo/PointOfInterestController.groovy
+./grails-app/controllers/example/grails/PointOfInterestController.groovy
 ----
-include::{sourceDir}/grails-app/controllers/demo/PointOfInterestController.groovy[lines=1..16]
-include::{sourceDir}/grails-app/controllers/demo/PointOfInterestController.groovy[tag=uploadFeaturedImage]
-include::{sourceDir}/grails-app/controllers/demo/PointOfInterestController.groovy[lines=184]
+include::{sourceDir}/grails-app/controllers/example/grails/PointOfInterestController.groovy[tag=uploadFeaturedImage, indent=0]
 ----
 
 We configure the local server url which will host the uploaded images and the local
@@ -22,15 +20,17 @@ Service uses the `transferTo` method to transfer the file to a local file path.
 In case of error, the service deletes the file it has previously transfered
 
 [source, groovy]
-./grails-app/services/demo/UploadPointOfInterestFeaturedImageService.groovy
+./grails-app/services/example/grails/UploadPointOfInterestFeaturedImageService.groovy
 ----
-include::{sourceDir}/grails-app/services/demo/UploadPointOfInterestFeaturedImageService.groovy[]
+include::{sourceDir}/grails-app/services/example/grails/UploadPointOfInterestFeaturedImageService.groovy[]
 ----
 
-
+The service updates `featuredImageUrl` with the help of a GORM Data Service:
 
 [source, groovy]
-./grails-app/services/demo/PointOfInterestGormService.groovy
+./grails-app/services/example/grails/PointOfInterestDataService.groovy
 ----
-include::{sourceDir}/grails-app/services/demo/PointOfInterestGormService.groovy[tag=updateFeaturedImageUrl]
+include::{sourceDir}/grails-app/services/example/grails/PointOfInterestDataService.groovy[]
 ----
+
+

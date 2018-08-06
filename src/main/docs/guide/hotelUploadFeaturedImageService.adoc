@@ -2,24 +2,24 @@ The `uploadFeatureImage` controller's action uses the previously described comma
 object to validate the upload form submission. If it does not find validation errors, it invokes a service.
 
 [source, groovy]
-./grails-app/controllers/demo/HotelController.groovy
+./grails-app/controllers/example/grails/HotelController.groovy
 ----
-include::{sourceDir}/grails-app/controllers/demo/HotelController.groovy[lines=1..16]
-include::{sourceDir}/grails-app/controllers/demo/HotelController.groovy[tag=uploadFeaturedImage]
-include::{sourceDir}/grails-app/controllers/demo/HotelController.groovy[lines=184]
+include::{sourceDir}/grails-app/controllers/example/grails/HotelController.groovy[tag=uploadFeaturedImage, indent=0]
 ----
 
 Service uses the `amazonS3Service` provided by the plugin to upload the
 file to AWS S3. In case of error, the service deletes the file it has previously uploaded.
 
 [source, groovy]
-./grails-app/services/demo/UploadHotelFeaturedImageService.groovy
+./grails-app/services/example/grails/UploadHotelFeaturedImageService.groovy
 ----
-include::{sourceDir}/grails-app/services/demo/UploadHotelFeaturedImageService.groovy[]
+include::{sourceDir}/grails-app/services/example/grails/UploadHotelFeaturedImageService.groovy[]
 ----
 
+The domain class instance is updated with the help of GORM Data Service:
+
 [source, groovy]
-./grails-app/services/demo/HotelGormService.groovy
+./grails-app/services/example/grails/HotelDataService.groovy
 ----
-include::{sourceDir}/grails-app/services/demo/HotelGormService.groovy[tag=updateFeaturedImageUrl]
+include::{sourceDir}/grails-app/services/example/grails/HotelDataService.groovy[]
 ----

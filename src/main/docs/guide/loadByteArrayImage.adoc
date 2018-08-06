@@ -1,9 +1,9 @@
-Create an action which renders the restaurant's featured image:
+Create an action in `RestaurantController` which renders the restaurant's featured image:
 
 [source, groovy]
-./grails-app/controllers/demo/RestaurantController.groovy
+./grails-app/controllers/example/grails/RestaurantController.groovy
 ----
-include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[tag=featuredImage]
+include::{sourceDir}/grails-app/controllers/example/grails/RestaurantController.groovy[tag=featuredImage, indent=0]
 ----
 
 Use the `g:createLink` GSP tag to reference the previous controller action in the _img_ _src_ attribute.
@@ -11,5 +11,5 @@ Use the `g:createLink` GSP tag to reference the previous controller action in th
 [source, groovy]
 ./grails-app/views/restaurant/show.gsp
 ----
-include::{sourceDir}/grails-app/views/restaurant/show.gsp[lines=22..25]
+include::{sourceDir}/grails-app/views/restaurant/show.gsp[lines=22..25, indent=0]
 ----

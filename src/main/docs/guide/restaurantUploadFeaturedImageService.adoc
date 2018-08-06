@@ -1,24 +1,20 @@
 The `uploadFeatureImage` controller's action uses the previously described command
-object to validate the upload form submission. If it does not find validation errors, it invokes a service.
+object to validate the upload form submission. If it does not find validation errors, it invokes a http://gorm.grails.org/6.1.x/hibernate/manual/#dataServices[Gorm Data Service].
 
 [source, groovy]
-./grails-app/controllers/demo/RestaurantController.groovy
-----
-include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=1..16]
-include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[tag=uploadFeaturedImage]
-include::{sourceDir}/grails-app/controllers/demo/RestaurantController.groovy[lines=212]
+./grails-app/controllers/example/grails/RestaurantController.groovy
 ----
 
-Service extracts the content type and byte[] and saves them in the database.
+include::{sourceDir}/grails-app/controllers/example/grails/RestaurantController.groovy[tag=uploadFeaturedImage]
 
-[source,groovy]
-./grails-app/services/demo/UploadRestaurantFeaturedImageService.groovy
 ----
-include::{sourceDir}/grails-app/services/demo/UploadRestaurantFeaturedImageService.groovy[]
-----
+
+The complete GORM Data Service is shown in the following code snippet:
 
 [source,groovy]
-./grails-app/services/demo/RestaurantGormService.groovy
+./grails-app/services/example/grails/RestaurantDataService.groovy
 ----
-include::{sourceDir}/grails-app/services/demo/RestaurantGormService.groovy[tag=updateRestaurantFeaturedImage]
+include::{sourceDir}/grails-app/services/example/grails/RestaurantDataService.groovy[]
 ----
+
+<1> The first argument should be the id of the object to update. If any of the parameters don’t match up to a property on the domain class then a compilation error will occur.
