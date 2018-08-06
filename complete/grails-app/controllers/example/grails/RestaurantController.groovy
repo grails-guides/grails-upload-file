@@ -1,6 +1,5 @@
 package example.grails
 
-import grails.gorm.transactions.ReadOnly
 import groovy.transform.CompileStatic
 import org.springframework.context.MessageSource
 
