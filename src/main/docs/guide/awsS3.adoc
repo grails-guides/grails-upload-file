@@ -9,7 +9,25 @@ Modify you `build.grade` file
 [source, groovy]
 .build.gradle
 ----
+repositories {
+...
+..
+include::{sourceDir}/build.gradle[tag=awssdkrepo]
+}
+dependencies {
+...
+..
+.
 include::{sourceDir}/build.gradle[tag=awssdk]
+}
+----
+
+Define `awsSdkS3Version` in `gradle.properties`
+
+[source, groovy]
+.gradle.properties
+----
+include::{sourceDir}/gradle.properties[]
 ----
 
 We are going to upload our files to an already existing bucket.
