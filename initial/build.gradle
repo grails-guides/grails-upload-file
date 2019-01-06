@@ -27,6 +27,8 @@ repositories {
     //tag::awssdkrepo[]
     maven { url 'http://dl.bintray.com/agorapulse/libs' }
     //end::awssdkrepo[]
+    maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
