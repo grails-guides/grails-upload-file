@@ -95,7 +95,7 @@ bootRun {
 //end::bootRunSystemProperties[]
 
 codenarc {
-    toolVersion = '1.2'
+    toolVersion = '1.2.1'
     configFile = new File(projectDir, 'config/codenarc/rules.groovy')
     reportFormat = 'html'
 }
