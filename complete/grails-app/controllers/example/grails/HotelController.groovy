@@ -1,10 +1,12 @@
 package example.grails
 
+import grails.gorm.transactions.Transactional
 import org.springframework.context.MessageSource
 import groovy.transform.CompileStatic
 
 @SuppressWarnings('LineLength')
 @CompileStatic
+@Transactional
 class HotelController {
 
     static allowedMethods = [
