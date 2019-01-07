@@ -27,9 +27,19 @@ repositories {
     //tag::awssdkrepo[]
     maven { url 'http://dl.bintray.com/agorapulse/libs' }
     //end::awssdkrepo[]
+    maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
 }
 
 dependencies {
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
@@ -64,12 +74,13 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:$htmlunitVersion"
 //tag::awssdk[]
     compile "org.grails.plugins:aws-sdk-s3:$awsSdkS3Version"
+    compile "com.amazonaws:aws-java-sdk-s3:1.11.375"
 //end::awssdk[]    
 }
 
 bootRun {
     jvmArgs('-Dspring.output.ansi.enabled=always')
-    addResources = true
+    sourceResources sourceSets.main
     systemProperties System.properties
 }
 
@@ -85,7 +96,7 @@ bootRun {
 //end::bootRunSystemProperties[]
 
 codenarc {
-    toolVersion = '1.2'
+    toolVersion = '1.2.1'
     configFile = new File(projectDir, 'config/codenarc/rules.groovy')
     reportFormat = 'html'
 }
