@@ -1,4 +1,4 @@
-Grails 3's default file size is 128000 (~128KB).
+Grails 4's default file size is 128000 (~128KB).
 
 We are going to allow 25MB files uploads.
 

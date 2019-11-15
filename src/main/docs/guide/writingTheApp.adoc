@@ -1,4 +1,4 @@
-The `initial` folder contains a Grails 3 application created with the `web` profile.
+The `initial` folder contains a Grails 4 application created with the `web` profile.
 It has several Controllers, GORM Data Services, Domain classes and a simple CRUD interface built with http://gsp.grails.org[GSP]s.
 It is an app to list tourism resources; hotels, restaurants, and points of interest.
 
