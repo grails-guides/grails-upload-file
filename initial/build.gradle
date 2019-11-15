@@ -78,7 +78,11 @@ dependencies {
 }
 
 bootRun {
-    jvmArgs('-Dspring.output.ansi.enabled=always')
+    jvmArgs(
+            '-Dspring.output.ansi.enabled=always',
+            '-noverify',
+            '-XX:TieredStopAtLevel=1',
+            '-Xmx1024m')
     sourceResources sourceSets.main
     systemProperties System.properties
 }
