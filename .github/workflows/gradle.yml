@@ -1,37 +1,26 @@
-name: Java CI
+name: Java CI with Gradle
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      contents: read
+    strategy:
+      matrix:
+        java: ['8']
     env:
-      WORKSPACE: ${{ github.workspace }}
-      GRADLE_OPTS: -Xmx1500m -Dfile.encoding=UTF-8
+      JDK_VERSION:  ${{ matrix.java }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v5
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
         with:
-          distribution: liberica
-          java-version: 17
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5.0.2
-        with:
-          develocity-access-key: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
-      - name: Run Tests
-        run: |
-          (set -x; ./gradlew clean check --no-daemon)
-      - name: Publish Test Report
-        if: failure()
-        uses: scacap/action-surefire-report@5609ce4db72c09db044803b344a8968fd1f315da # v1.9.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/build/test-results/test/TEST-*.xml'
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Run script
+        run: ./githubactions-build.sh
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_NAME: ${{ secrets.GIT_NAME }}
+          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
