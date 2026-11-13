@@ -22,14 +22,12 @@ class HotelS3UploadSpec extends Specification implements HttpClientSupport {
 
     static final String BUCKET = 'grails-guides-test'
 
-    // tag::localstack[]
     @Shared
     LocalStackContainer localstack = new LocalStackContainer(DockerImageName.parse('localstack/localstack:4.4.0'))
             .withServices('s3') // <2>
 
     @Shared
     S3Client localstackS3Client
-    // end::localstack[]
 
     HotelDataService hotelDataService
     UploadHotelFeaturedImageService uploadHotelFeaturedImageService

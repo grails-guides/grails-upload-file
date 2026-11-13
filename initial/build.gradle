@@ -113,6 +113,9 @@ dependencies {
     runtimeOnly "com.h2database:h2"
     runtimeOnly "com.zaxxer:HikariCP"
     integrationTestImplementation testFixtures("org.apache.grails:grails-geb")
+    // tag::httpClient[]
+    integrationTestImplementation "org.apache.grails:grails-testing-support-http-client"
+    // end::httpClient[]
     testImplementation "org.apache.grails:grails-testing-support-datamapping"
     testImplementation "org.apache.grails:grails-testing-support-web"
     testImplementation "org.mockito:mockito-core"

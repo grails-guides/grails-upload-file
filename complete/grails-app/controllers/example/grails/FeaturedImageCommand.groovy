@@ -25,10 +25,8 @@ class FeaturedImageCommand implements Validateable {
         }
     }
 
-    // tag::sanitizedFilename[]
     String sanitizedFilename() {
         String filename = StringUtils.getFilename(featuredImageFile.originalFilename) // <3>
         filename.replaceAll(/[^A-Za-z0-9._-]/, '_') // <4>
     }
-    // end::sanitizedFilename[]
 }

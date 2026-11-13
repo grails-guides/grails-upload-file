@@ -14,7 +14,7 @@ This branch is the Grails 8 companion for **uploading files**: a `MultipartFile`
 
 | Directory | What it is |
 |---|---|
-| [`initial/`](initial/) | Grails 8 web starter (`web` profile, Hibernate, Tomcat, DevTools, H2). Start here and follow the guide. |
+| [`initial/`](initial/) | Grails 8 web app (`web` profile, Hibernate, Tomcat, H2) with CRUD pages for restaurants, points of interest, and hotels, and no upload code. Start here and follow the guide. |
 | [`complete/`](complete/) | The finished app: domain classes, data services, upload services, controllers, views, and tests. |
 
 ## Running
