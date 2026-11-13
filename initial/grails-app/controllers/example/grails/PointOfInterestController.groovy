@@ -1,31 +1,20 @@
 package example.grails
 
+import grails.compiler.GrailsCompileStatic
 import org.springframework.context.MessageSource
-import groovy.transform.CompileStatic
 
-@CompileStatic
-@SuppressWarnings('LineLength')
+@GrailsCompileStatic
 class PointOfInterestController {
 
     static allowedMethods = [
             save: 'POST',
             update: 'PUT',
-            uploadFeaturedImage: 'POST',
             delete: 'DELETE',
     ]
 
     PointOfInterestDataService pointOfInterestDataService
-
-    MessageSource messageSource
-
     CrudMessageService crudMessageService
-
-    private String domainName(Locale locale) {
-        messageSource.getMessage('pointOfInterest.label',
-                [] as Object[],
-                'Point of Interest',
-                locale)
-    }
+    MessageSource messageSource
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -44,9 +33,22 @@ class PointOfInterestController {
         [pointOfInterest: pointOfInterest]
     }
 
-    @SuppressWarnings(['FactoryMethodName'])
     def create() {
         [pointOfInterest: new PointOfInterest()]
+    }
+
+    def save(NameCommand cmd) {
+        if (cmd.hasErrors()) {
+            respond cmd.errors, model: [pointOfInterest: cmd], view: 'create'
+            return
+        }
+        PointOfInterest pointOfInterest = pointOfInterestDataService.save(cmd.name)
+        if (pointOfInterest.hasErrors()) {
+            respond pointOfInterest.errors, model: [pointOfInterest: pointOfInterest], view: 'create'
+            return
+        }
+        flash.message = crudMessage(CRUD.CREATE, pointOfInterest.id)
+        redirect pointOfInterest
     }
 
     def edit(Long id) {
@@ -58,57 +60,21 @@ class PointOfInterestController {
         [pointOfInterest: pointOfInterest]
     }
 
-    def save(NameCommand cmd) {
-        if (cmd == null) {
-            notFound()
-            return
-        }
-
+    def update(NameUpdateCommand cmd) {
         if (cmd.hasErrors()) {
-            respond cmd.errors, model: [pointOfInterest: cmd], view: 'create'
+            respond cmd.errors, model: [pointOfInterest: cmd], view: 'edit'
             return
         }
-
-        PointOfInterest pointOfInterest = pointOfInterestDataService.save(cmd.name)
-
+        PointOfInterest pointOfInterest = pointOfInterestDataService.updateName(cmd.id, cmd.version, cmd.name)
         if (pointOfInterest == null) {
             notFound()
             return
         }
-
         if (pointOfInterest.hasErrors()) {
-            respond pointOfInterest.errors, model: [pointOfInterest: pointOfInterest], view: 'create'
+            respond pointOfInterest.errors, model: [pointOfInterest: pointOfInterest], view: 'edit'
             return
         }
-
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.CREATE, domainName(locale), pointOfInterest.id, locale)
-        redirect pointOfInterest
-    }
-
-    def update(NameUpdateCommand cmd) {
-        if (cmd == null) {
-            notFound()
-            return
-        }
-
-        if (cmd.hasErrors()) {
-            respond cmd.errors, model: [pointOfInterest: cmd], view:'edit'
-            return
-        }
-
-        PointOfInterest pointOfInterest = pointOfInterestDataService.updateName(cmd.id, cmd.version, cmd.name)
-        if ( !pointOfInterest ) {
-            notFound()
-            return
-        }
-        if (pointOfInterest.hasErrors()) {
-            respond pointOfInterest, model: [pointOfInterest: pointOfInterest], view:'edit'
-            return
-        }
-
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), pointOfInterest.id, locale)
+        flash.message = crudMessage(CRUD.UPDATE, pointOfInterest.id)
         redirect pointOfInterest
     }
 
@@ -117,17 +83,19 @@ class PointOfInterestController {
             notFound()
             return
         }
-
         pointOfInterestDataService.delete(id)
-
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.DELETE, domainName(locale), id, locale)
+        flash.message = crudMessage(CRUD.DELETE, id)
         redirect action: 'index', method: 'GET'
     }
 
     protected void notFound() {
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.NOT_FOUND, domainName(locale), params.long('id'), locale)
+        flash.message = crudMessage(CRUD.NOT_FOUND, params.long('id'))
         redirect action: 'index', method: 'GET'
+    }
+
+    private String crudMessage(CRUD crud, Long id) {
+        Locale locale = request.locale
+        String domainName = messageSource.getMessage('pointOfInterest.label', [] as Object[], 'Point of Interest', locale)
+        crudMessageService.message(crud, domainName, id, locale)
     }
 }

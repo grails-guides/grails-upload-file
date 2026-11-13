@@ -1,0 +1,45 @@
+name: Grails 8 CI
+
+on:
+  push:
+    branches: [ grails8, grails5 ]
+  pull_request:
+    branches: [ grails8, grails5 ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [ initial, complete ]
+    name: ${{ matrix.app }} (test + integrationTest)
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Unit + integration tests
+        working-directory: ${{ matrix.app }}
+        run: |
+          chmod +x gradlew
+          ./gradlew test integrationTest --console=plain --stacktrace
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.app }}
+          path: ${{ matrix.app }}/build/reports/tests/
+          if-no-files-found: ignore

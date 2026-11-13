@@ -1,0 +1,51 @@
+package example.grails
+
+import grails.testing.gorm.DataTest
+import spock.lang.Specification
+import spock.lang.Unroll
+
+class DomainConstraintsSpec extends Specification implements DataTest {
+
+    void setupSpec() {
+        mockDomains(Restaurant, PointOfInterest, Hotel)
+    }
+
+    @Unroll
+    void "#instance.class.simpleName with name '#instance.name' is #description"() {
+        expect:
+        instance.validate() == valid
+        instance.errors.hasFieldErrors('name') == !valid
+
+        where:
+        instance                            || valid
+        new Restaurant(name: null)          || false
+        new Restaurant(name: '')            || false
+        new Restaurant(name: 'Diner')       || true
+        new PointOfInterest(name: null)     || false
+        new PointOfInterest(name: '')       || false
+        new PointOfInterest(name: 'Museum') || true
+        new Hotel(name: null)               || false
+        new Hotel(name: '')                 || false
+        new Hotel(name: 'Grand')            || true
+
+        description = valid ? 'valid' : 'invalid'
+    }
+
+    void "a featured image is optional"() {
+        expect:
+        new Restaurant(name: 'Diner').validate()
+        new PointOfInterest(name: 'Museum').validate()
+        new Hotel(name: 'Grand').validate()
+    }
+
+    void "a restaurant image above 25MB is rejected"() {
+        given:
+        Restaurant restaurant = new Restaurant(name: 'Diner',
+                featuredImageBytes: new byte[25 * 1024 * 1024 + 1],
+                featuredImageContentType: 'image/png')
+
+        expect:
+        !restaurant.validate()
+        restaurant.errors['featuredImageBytes'].code == 'maxSize.exceeded'
+    }
+}

@@ -3,7 +3,6 @@ package example.grails
 import groovy.transform.CompileStatic
 import org.springframework.context.MessageSource
 
-@SuppressWarnings('GrailsStatelessService')
 @CompileStatic
 class CrudMessageService {
 
@@ -17,28 +16,20 @@ class CrudMessageService {
     }
 
     String defaultMessageByCrud(CRUD crud) {
-        switch (crud) {
-            case CRUD.NOT_FOUND:
-                'Not Found'
-            case CRUD.CREATE:
-                'Created'
-            case CRUD.UPDATE:
-                'Updated'
-            case CRUD.DELETE:
-                'Deleted'
+        return switch (crud) {
+            case CRUD.NOT_FOUND -> 'Not Found'
+            case CRUD.CREATE -> 'Created'
+            case CRUD.UPDATE -> 'Updated'
+            case CRUD.DELETE -> 'Deleted'
         }
     }
 
     String codeByCrud(CRUD crud) {
-        switch (crud) {
-            case CRUD.NOT_FOUND:
-                'default.not.found.message'
-            case CRUD.CREATE:
-                'default.created.message'
-            case CRUD.UPDATE:
-                'default.updated.message'
-            case CRUD.DELETE:
-                'default.deleted.message'
+        return switch (crud) {
+            case CRUD.NOT_FOUND -> 'default.not.found.message'
+            case CRUD.CREATE -> 'default.created.message'
+            case CRUD.UPDATE -> 'default.updated.message'
+            case CRUD.DELETE -> 'default.deleted.message'
         }
     }
 }

@@ -1,31 +1,20 @@
 package example.grails
 
+import grails.compiler.GrailsCompileStatic
 import org.springframework.context.MessageSource
-import groovy.transform.CompileStatic
 
-@SuppressWarnings('LineLength')
-@CompileStatic
+@GrailsCompileStatic
 class HotelController {
 
     static allowedMethods = [
             save: 'POST',
             update: 'PUT',
-            uploadFeaturedImage: 'POST',
             delete: 'DELETE',
     ]
 
     HotelDataService hotelDataService
-
-    MessageSource messageSource
-
     CrudMessageService crudMessageService
-
-    private String domainName(Locale locale) {
-        messageSource.getMessage('hotel.label',
-                [] as Object[],
-                'Hotel',
-                locale)
-    }
+    MessageSource messageSource
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -44,9 +33,22 @@ class HotelController {
         [hotel: hotel]
     }
 
-    @SuppressWarnings(['FactoryMethodName'])
     def create() {
         [hotel: new Hotel()]
+    }
+
+    def save(NameCommand cmd) {
+        if (cmd.hasErrors()) {
+            respond cmd.errors, model: [hotel: cmd], view: 'create'
+            return
+        }
+        Hotel hotel = hotelDataService.save(cmd.name)
+        if (hotel.hasErrors()) {
+            respond hotel.errors, model: [hotel: hotel], view: 'create'
+            return
+        }
+        flash.message = crudMessage(CRUD.CREATE, hotel.id)
+        redirect hotel
     }
 
     def edit(Long id) {
@@ -58,79 +60,42 @@ class HotelController {
         [hotel: hotel]
     }
 
-    def save(NameCommand cmd) {
-        if (cmd == null) {
-            notFound()
-            return
-        }
-
-        if (cmd.hasErrors()) {
-            respond cmd.errors, model: [hotel: cmd], view:'create'
-            return
-        }
-
-        Hotel hotel = hotelDataService.save(cmd.name)
-
-        if ( hotel == null ) {
-            notFound()
-            return
-        }
-
-        if ( hotel.hasErrors() ) {
-            respond hotel.errors, model: [hotel: hotel], view:'create'
-            return
-        }
-
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.CREATE, domainName(locale), hotel.id, locale)
-        redirect hotel
-    }
-
     def update(NameUpdateCommand cmd) {
-        if (cmd == null) {
-            notFound()
-            return
-        }
-
         if (cmd.hasErrors()) {
             respond cmd.errors, model: [hotel: cmd], view: 'edit'
             return
         }
-
         Hotel hotel = hotelDataService.update(cmd.id, cmd.version, cmd.name)
-
-        if ( hotel == null) {
+        if (hotel == null) {
             notFound()
             return
         }
-
-        if ( hotel.hasErrors() ) {
+        if (hotel.hasErrors()) {
             respond hotel.errors, model: [hotel: hotel], view: 'edit'
             return
         }
-
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), hotel.id, locale)
+        flash.message = crudMessage(CRUD.UPDATE, hotel.id)
         redirect hotel
     }
 
     def delete(Long id) {
-
-        if (!id) {
+        if (id == null) {
             notFound()
             return
         }
-
         hotelDataService.delete(id)
-
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.DELETE, domainName(locale), id, locale)
+        flash.message = crudMessage(CRUD.DELETE, id)
         redirect action: 'index', method: 'GET'
     }
 
     protected void notFound() {
-        Locale locale = request.locale
-        flash.message = crudMessageService.message(CRUD.DELETE, domainName(locale), params.long('id'), locale)
+        flash.message = crudMessage(CRUD.NOT_FOUND, params.long('id'))
         redirect action: 'index', method: 'GET'
+    }
+
+    private String crudMessage(CRUD crud, Long id) {
+        Locale locale = request.locale
+        String domainName = messageSource.getMessage('hotel.label', [] as Object[], 'Hotel', locale)
+        crudMessageService.message(crud, domainName, id, locale)
     }
 }

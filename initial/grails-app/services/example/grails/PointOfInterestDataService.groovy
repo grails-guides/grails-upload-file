@@ -2,11 +2,10 @@ package example.grails
 
 import grails.gorm.services.Service
 
-@SuppressWarnings(['LineLength', 'UnusedVariable', 'SpaceAfterOpeningBrace', 'SpaceBeforeClosingBrace'])
 @Service(PointOfInterest)
 interface PointOfInterestDataService {
 
-    PointOfInterest get(Long id)
+    PointOfInterest get(Serializable id)
 
     List<PointOfInterest> list(Map args)
 

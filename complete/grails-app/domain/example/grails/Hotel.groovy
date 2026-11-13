@@ -3,11 +3,12 @@ package example.grails
 class Hotel {
 
     String name
-    String featuredImageUrl // <1>
-    String featuredImageKey // <2>
+    String featuredImageKey // <1>
+    String featuredImageUrl // <2>
 
     static constraints = {
-        featuredImageUrl nullable: true
+        name nullable: false, blank: false
         featuredImageKey nullable: true
+        featuredImageUrl nullable: true
     }
 }
